@@ -1,7 +1,7 @@
 class eSlideGallery {
-    constructor (selector,shift='left',convertImg=false) {
-        if (shift!='left' && shift != 'right') {
-            shift = 'left'
+    constructor (selector,shift='center',convertImg=false) {
+        if (shift!='left' && shift != 'right' && shift != 'center') {
+            shift = 'center'
         }
         let imageCount;
         this.activeNum = 0;
@@ -11,9 +11,9 @@ class eSlideGallery {
             let imageElemList = this.container.querySelectorAll(selector+' > img');
             if (imageElemList && imageElemList.length>0) {
                 imageCount = imageElemList.length;
-                if (imageCount != 0 && imageCount % 2 == 1) {
+                /*if (imageCount != 0 && imageCount % 2 == 1) {
                     shift = 'center';
-                }
+                }*/
                 /*this.activeNum = Math.floor(imageCount/2);
                 if (shift == 'left') {
                     this.activeNum = this.activeNum - 1;
@@ -32,15 +32,22 @@ class eSlideGallery {
                         this.container.append(imgElement);
                     }
                 }
+                if (shift == 'left') {
+                    this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
+                }
+                else if (shift == 'right') {
+                    this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
+                    this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
+                }
             }
         }
         else {
             let imageElemList = this.container.children;
             if (imageElemList && imageElemList.length>0) {
                 imageCount = imageElemList.length;
-                if (imageCount != 0 && imageCount % 2 == 1) {
+                /*if (imageCount != 0 && imageCount % 2 == 1) {
                     shift = 'center';
-                }
+                }*/
                 /*this.activeNum = Math.floor(imageCount/2);
                 if (shift == 'left') {
                     this.activeNum = this.activeNum - 1;
@@ -50,6 +57,13 @@ class eSlideGallery {
                     /*if (i == this.activeNum) {
                         imageElemList[i].classList.add('__eslidegallery-active');
                     }*/
+                }
+                if (shift == 'left') {
+                    this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
+                }
+                else if (shift == 'right') {
+                    this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
+                    this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                 }
             }
         }
