@@ -4,7 +4,7 @@
 .__eslidegallery-slide {
     background-position: center;
     background-size: cover;
-    transition: .9s;
+    transition: left .9s, top .9s, width .9s, height .9s, z-index .9s;
     position: absolute;
     height: 64%;
     width: 25%;
@@ -77,7 +77,7 @@
     top: 10%;
     left: 68%;
     right: initial;
-    z-index: 90;
+    z-index: 80;
 }
 .__eslidegallery-right .__eslidegallery-slide:nth-child(1) {
     height: 64%;
