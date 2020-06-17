@@ -4,7 +4,6 @@ class eSlideGallery {
             shift = 'center'
         }
         this.imageCount;
-        //this.activeNum = 0;
         this.position = 1;
         this.container = document.querySelector(selector);
         this.container.classList.add('__eslidegallery-container');
@@ -18,13 +17,6 @@ class eSlideGallery {
             let imageElemList = this.container.querySelectorAll(selector+' > img');
             if (imageElemList && imageElemList.length>0) {
                 this.imageCount = imageElemList.length;
-                /*if (this.imageCount != 0 && this.imageCount % 2 == 1) {
-                    shift = 'center';
-                }*/
-                /*this.activeNum = Math.floor(this.imageCount/2);
-                if (shift == 'left') {
-                    this.activeNum = this.activeNum - 1;
-                }*/
                 for (let i=0; i<this.imageCount; i++) {
                     let imgSrc = imageElemList[i].getAttribute('src');
                     imageElemList[i].remove();
@@ -33,9 +25,6 @@ class eSlideGallery {
                         imgElement.classList.add('__eslidegallery-slide');
                         imgElement.style.backgroundImage = "url('"+imgSrc+"')";
                         imgElement.setAttribute('data-img',imgSrc);
-                        /*if (i == this.activeNum) {
-                            imgElement.classList.add('__eslidegallery-active');
-                        }*/
                         this.container.append(imgElement);
                     }
                 }
@@ -56,18 +45,8 @@ class eSlideGallery {
             let imageElemList = this.container.children;
             if (imageElemList && imageElemList.length>0) {
                 this.imageCount = imageElemList.length;
-                /*if (this.imageCount != 0 && this.imageCount % 2 == 1) {
-                    shift = 'center';
-                }*/
-                /*this.activeNum = Math.floor(this.imageCount/2);
-                if (shift == 'left') {
-                    this.activeNum = this.activeNum - 1;
-                }*/
                 for (let i=0; i<this.imageCount; i++) {
                     imageElemList[i].classList.add('__eslidegallery-slide');
-                    /*if (i == this.activeNum) {
-                        imageElemList[i].classList.add('__eslidegallery-active');
-                    }*/
                 }
                 if (shift == 'left') {
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
@@ -85,6 +64,7 @@ class eSlideGallery {
 
         this.container.setAttribute('data-count',this.imageCount);
         this.container.setAttribute('data-position',this.position);
+        this.container.classList.add('__eslidegallery-'+shift);
 
         /* touch */
         let th = this;
@@ -129,7 +109,6 @@ class eSlideGallery {
             }
         },false);
 
-
         this.move = function (mov) {
             let moving = mov/this.moveKoef
             let styleMove = '+ '+moving;
@@ -139,17 +118,6 @@ class eSlideGallery {
             th.container.children[activePosition].style.transform = 'translateX(' + moving + 'px)';
         }
 
-
-
-        /*this.activeNum = Math.floor(this.imageCount/2) + 1;
-        if (shift == 'left') {
-            this.activeNum = this.activeNum - 1;
-        }
-        
-        this.container.querySelector('.__eslidegallery-slide:nth-child('+this.activeNum+')').classList.add('__eslidegallery-active');*/
-
-        this.container.classList.add('__eslidegallery-'+shift);
-
         this.next = function() {
             this.container.append(this.container.querySelector('.__eslidegallery-slide:first-child'));
             this.position++;
@@ -158,8 +126,6 @@ class eSlideGallery {
             }
             this.container.setAttribute('data-position',this.position);
             return this.position;
-            /*this.container.querySelector('.__eslidegallery-slide').classList.remove('__eslidegallery-active');
-            this.container.querySelector('.__eslidegallery-slide:nth-child('+this.activeNum+')').classList.add('__eslidegallery-active');*/
         }
 
         this.prev = function() {
@@ -170,8 +136,6 @@ class eSlideGallery {
             }
             this.container.setAttribute('data-position',this.position);
             return this.position;
-            /*this.container.querySelector('.__eslidegallery-slide').classList.remove('__eslidegallery-active');
-            this.container.querySelector('.__eslidegallery-slide:nth-child('+this.activeNum+')').classList.add('__eslidegallery-active');*/
         }
     }
 }
