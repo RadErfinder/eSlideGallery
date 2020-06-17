@@ -1,0 +1,14 @@
+.__eslidegallery-container {
+    position: relative;
+    width: 100%;
+}
+.__eslidegallery-slide {
+    background-size: cover;
+    height: 100%;
+}
+
+.__eslidegallery-active-center .slide-active {
+    height: 100%;
+    width: 50%;
+    top: 0px;
+}
