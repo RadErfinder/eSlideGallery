@@ -1,1 +1,2 @@
 # eSlideGallery
+Manual coming soon
