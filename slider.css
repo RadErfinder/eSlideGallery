@@ -13,6 +13,14 @@
     z-index: 10;
 }
 /*left*/
+.__eslidegallery-left .__eslidegallery-slide:nth-child(1) {
+    height: 80%;
+    width: 32%;
+    top: 10%;
+    left: 0%;
+    right: initial;
+    z-index: 90;
+}
 .__eslidegallery-left .__eslidegallery-slide:nth-child(2) {
     height: 100%;
     width: 40%;
@@ -35,42 +43,18 @@
     top: 18%;
     left: 75%;
     right: initial;
-    z-index: 80;
+    z-index: 50;
 }
-.__eslidegallery-left .__eslidegallery-slide:nth-child(1) {
-    height: 80%;
-    width: 32%;
-    top: 10%;
-    left: 0%;
-    right: initial;
-    z-index: 90;
-}
-.__eslidegallery-left .__eslidegallery-slide:last-child {
+/*.__eslidegallery-left .__eslidegallery-slide:last-child {
     height: 80%;
     width: 32%;
     top: 10%;
     left: 0%;
     right: initial;
     z-index: 70;
-}
+}*/
 
 /*right*/
-.__eslidegallery-right .__eslidegallery-slide:nth-child(3) {
-    height: 100%;
-    width: 40%;
-    top: 0;
-    left: 40%;
-    right: initial;
-    z-index: 100;
-}
-.__eslidegallery-right .__eslidegallery-slide:nth-child(4) {
-    height: 80%;
-    width: 32%;
-    top: 10%;
-    left: 68%;
-    right: initial;
-    z-index: 80;
-}
 .__eslidegallery-right .__eslidegallery-slide:nth-child(1) {
     height: 64%;
     width: 25%;
@@ -87,14 +71,30 @@
     right: initial;
     z-index: 90;
 }
-.__eslidegallery-right .__eslidegallery-slide:last-child {
+.__eslidegallery-right .__eslidegallery-slide:nth-child(3) {
+    height: 100%;
+    width: 40%;
+    top: 0;
+    left: 40%;
+    right: initial;
+    z-index: 100;
+}
+.__eslidegallery-right .__eslidegallery-slide:nth-child(4) {
+    height: 80%;
+    width: 32%;
+    top: 10%;
+    left: 68%;
+    right: initial;
+    z-index: 50;
+}
+/*.__eslidegallery-right .__eslidegallery-slide:last-child {
     height: 64%;
     width: 25%;
     top: 18%;
     left: 0%;
     right: initial;
     z-index: 70;
-}
+}*/
 
 /*center*/
 .__eslidegallery-center .__eslidegallery-slide:nth-child(1) {
@@ -109,7 +109,7 @@
     height: 80%;
     width: 32%;
     top: 10%;
-    left: 15%;
+    left: 12%;
     right: initial;
     z-index: 90;
 }
@@ -125,9 +125,9 @@
     height: 80%;
     width: 32%;
     top: 10%;
-    left: 53%;
+    left: 56%;
     right: initial;
-    z-index: 90;
+    z-index: 50;
 }
 .__eslidegallery-center .__eslidegallery-slide:nth-child(5) {
     height: 64%;
@@ -135,13 +135,13 @@
     top: 18%;
     left: 75%;
     right: initial;
-    z-index: 80;
+    z-index: 50;
 }
-.__eslidegallery-center .__eslidegallery-slide:last-child {
+/*.__eslidegallery-center .__eslidegallery-slide:last-child {
     height: 64%;
     width: 25%;
     top: 18%;
     left: 0%;
     right: initial;
     z-index: 70;
-}
+}*/
