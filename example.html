@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 1100px;
+            max-width: 96vw;
+            margin: 10px auto;
+        }
+        .slider-container {
+            height: 300px;
+        }
+        .slider-nav {
+            padding: 20px;
+            text-align: center;
+        }
+        .slider-nav * {
+            display: inline;
+        }
+    </style>
+    <link rel="stylesheet" href="slider.css">
+</head>
+<body>
+
+<div class="container">
+<div class="slider-container" id="slider">
+    <div data-img="img/001.jpg" style="background-image: url('img/001.jpg')"></div>
+    <div data-img="img/002.jpg" style="background-image: url('img/002.jpg')"></div>
+    <div data-img="img/003.jpg" style="background-image: url('img/003.jpg')"></div>
+    <div data-img="img/004.jpg" style="background-image: url('img/004.jpg')"></div>
+    <div data-img="img/005.jpg" style="background-image: url('img/005.jpg')"></div>
+    <div data-img="img/006.jpg" style="background-image: url('img/006.jpg')"></div>
+</div>
+<div class="slider-nav">
+    <button class="slider-prev"><<</button>
+    <div class="slider-counter">
+        <span class="slider-total">6</span>
+        <span>/</span>
+        <span class="slider-current">1</span>
+    </div>
+    <button class="slider-next">>></button>
+</div>
+</div>
+<script src="slider.js"></script>
+<script>
+let slider = new eSlideGallery('#slider');
+document.querySelector('button.slider-prev').addEventListener('click',function(){
+    let num = slider.prev();
+    document.querySelector('.slider-current').innerHTML = num;
+});
+document.querySelector('button.slider-next').addEventListener('click',function(){
+    let num = slider.next();
+    document.querySelector('.slider-current').innerHTML = num;
+});
+</script>
+
+</body>
+</html>
