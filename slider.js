@@ -7,6 +7,7 @@ class eSlideGallery {
         this.position = 1;
         this.container = document.querySelector(selector);
         this.container.classList.add('__eslidegallery-container');
+        this.autoInterval = null;
 
         let activePosition = 2;
         if (shift=='left') {
@@ -136,6 +137,23 @@ class eSlideGallery {
             }
             this.container.setAttribute('data-position',this.position);
             return this.position;
+        }
+
+        this.auto = function(delay=3) {
+            if (this.autoInterval !== null) {
+                clearInterval(this.autoInterval);
+            }
+            let th = this;
+            delay = Number(delay);
+            if (isNaN(delay) || delay == 0) {
+                return;
+            }
+            if (delay < 100) {
+                delay = delay * 1000;
+            }
+            this.autoInterval = setInterval(() => {
+                th.next();
+            }, delay);
         }
     }
 }
