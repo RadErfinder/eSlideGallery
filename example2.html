@@ -34,14 +34,13 @@
 
 <div class="container">
 <div class="slider-container" id="slider">
-    <div style="background-image: url('example_img/001.jpg')"></div>
-    <div style="background-image: url('example_img/002.jpg')"></div>
-    <div style="background-image: url('example_img/003.jpg')"></div>
-    <div style="background-image: url('example_img/004.jpg')"></div>
-    <div style="background-image: url('example_img/005.jpg')"></div>
-    <div style="background-image: url('example_img/006.jpg')"></div>
+    <img src="example_img/001.jpg" alt="">
+    <img src="example_img/002.jpg" alt="">
+    <img src="example_img/003.jpg" alt="">
+    <img src="example_img/004.jpg" alt="">
+    <img src="example_img/005.jpg" alt="">
+    <img src="example_img/006.jpg" alt="">
 </div>
-<div class="slider-dots" id="dotcontainer"></div>
 <div class="slider-nav">
     <button class="slider-prev"><<</button>
     <div class="slider-counter">
@@ -54,7 +53,7 @@
 </div>
 <script src="slider.js"></script>
 <script>
-let slider = new eSlideGallery('#slider',{dots: '#dotcontainer',imgClick: true});
+let slider = new eSlideGallery('#slider',{imgClick: true, convertImg: true});
 document.querySelector('button.slider-prev').addEventListener('click',function(){
     let num = slider.prev();
     document.querySelector('.slider-current').innerHTML = num;

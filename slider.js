@@ -1,5 +1,5 @@
 class eSlideGallery {
-    constructor (selector, params = {shift: 'center', convertImg: false, dots: null}) {
+    constructor (selector, params = {shift: 'center', convertImg: false, dots: null, dotClick: false, imgClick: false}) {
         if (params.shift!='left' && params.shift != 'right' && params.shift != 'center') {
             params.shift = 'center'
         }
@@ -8,6 +8,12 @@ class eSlideGallery {
         }
         if (params.dots === undefined) {
             params.dots = null;
+        }
+        if (params.imgClick === undefined) {
+            params.imgClick = false;
+        }
+        if (params.dotClick === undefined) {
+            params.dotClick = false;
         }
         this.imageCount;
         this.position = 1;
@@ -42,14 +48,25 @@ class eSlideGallery {
                             imgElement.style.backgroundImage = "url('"+imgSrc+"')";
                             imgElement.setAttribute('data-img',imgSrc);
                             this.container.append(imgElement);
+                            if (params.imgClick) {
+                                imgElement.addEventListener('click',()=>{
+                                    th.setPosition(i+1)
+                                });
+                            }
                             if (this.dotContainer) {
                                 let dotElement = document.createElement('span');
                                 dotElement.classList.add('__eslidegallery-dot');
                                 if (i == 0) {
                                     dotElement.classList.add('__eslidegallery-active-dot');
                                 }
-                                dotElement.setAttribute('data-img',imgSrc);
+                                dotElement.setAttribute('data-item',i+1);
                                 this.dotContainer.append(dotElement);
+                                if (params.dotClick) {
+                                    let th = this;
+                                    dotElement.addEventListener('click',()=>{
+                                        th.setPosition(i+1)
+                                    });
+                                }
                             }
                         }
                     }
@@ -72,14 +89,25 @@ class eSlideGallery {
                     this.imageCount = imageElemList.length;
                     for (let i=0; i<this.imageCount; i++) {
                         imageElemList[i].classList.add('__eslidegallery-slide');
+                        if (params.imgClick) {
+                            imageElemList[i].addEventListener('click',()=>{
+                                th.setPosition(i+1)
+                            });
+                        }
                         if (this.dotContainer) {
                             let dotElement = document.createElement('span');
                             dotElement.classList.add('__eslidegallery-dot');
                             if (i == 0) {
                                 dotElement.classList.add('__eslidegallery-active-dot');
                             }
-                            dotElement.setAttribute('data-img',(i+1));
+                            dotElement.setAttribute('data-item',(i+1));
                             this.dotContainer.append(dotElement);
+                            if (params.dotClick) {
+                                let th = this;
+                                dotElement.addEventListener('click',()=>{
+                                    th.setPosition(i+1)
+                                });
+                            }
                         }
                     }
                     if (params.shift == 'left') {
@@ -152,7 +180,7 @@ class eSlideGallery {
             if (activeDot) {
                 activeDot.classList.remove('__eslidegallery-active-dot');
             }
-            let newActiveDot = this.dotContainer.querySelector('.__eslidegallery-dot[data-img="' + this.position + '"]');
+            let newActiveDot = this.dotContainer.querySelector('.__eslidegallery-dot[data-item="' + this.position + '"]');
             console.log(newActiveDot);
             if (newActiveDot) {
                 newActiveDot.classList.add('__eslidegallery-active-dot');
@@ -169,6 +197,38 @@ class eSlideGallery {
                 styleMove = '- '+moving;
             }
             th.container.children[activePosition].style.transform = 'translateX(' + moving + 'px)';
+        }
+
+        this.setPosition = function(position) {
+            if (!this.container || isNaN(position) || position == 0 || isNaN(this.imageCount) || this.imageCount == 0 || this.position == position) {
+                return;
+            }
+            let oldPosition = this.position;
+            let rightShift = this.imageCount - oldPosition + position;
+            let leftShift = this.imageCount + oldPosition - position;
+            
+            let th = this;
+
+            if (oldPosition < position && leftShift >= position - oldPosition) {
+                for (let i=0; i<(position - oldPosition); i++) {
+                    setTimeout(()=>{th.next()},150);
+                }
+            }
+            else if (oldPosition < position && leftShift < position - oldPosition) {
+                for (let i=0; i<leftShift; i++) {
+                    setTimeout(()=>{th.prev()},150);
+                }
+            }
+            else if (oldPosition > position && rightShift < oldPosition - position) {
+                for (let i=0; i<rightShift; i++) {
+                    setTimeout(()=>{th.next()},150);
+                }
+            }
+            else if (oldPosition > position && rightShift >= oldPosition - position) {
+                for (let i=0; i<(oldPosition - position); i++) {
+                    setTimeout(()=>{th.prev()},150);
+                }
+            }
         }
 
         this.next = function() {
