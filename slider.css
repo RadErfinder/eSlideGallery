@@ -121,3 +121,17 @@
     right: initial;
     z-index: 50;
 }
+/*dots*/
+.__eslidegallery-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #888888;
+    border: 2px solid rgba(255, 255, 255, 0);
+    margin: 2px;
+}
+.__eslidegallery-dot.__eslidegallery-active-dot {
+    background-color: #ffffff;
+    border: 2px solid #888888;
+}

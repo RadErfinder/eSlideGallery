@@ -1,6 +1,5 @@
 class eSlideGallery {
     constructor (selector, params = {shift: 'center', convertImg: false, dots: null}) {
-        console.log(params.convertImg);
         if (params.shift!='left' && params.shift != 'right' && params.shift != 'center') {
             params.shift = 'center'
         }
@@ -20,7 +19,10 @@ class eSlideGallery {
         else {
             this.container.classList.add('__eslidegallery-container');
             this.autoInterval = null;
-            this.dotContainer = params.dots;
+            this.dotContainer = null;
+            if (params.dots) {
+                this.dotContainer = document.querySelector(params.dots);
+            }
 
             let activePosition = 2;
             if (params.shift=='left') {
@@ -40,6 +42,15 @@ class eSlideGallery {
                             imgElement.style.backgroundImage = "url('"+imgSrc+"')";
                             imgElement.setAttribute('data-img',imgSrc);
                             this.container.append(imgElement);
+                            if (this.dotContainer) {
+                                let dotElement = document.createElement('span');
+                                dotElement.classList.add('__eslidegallery-dot');
+                                if (i == 0) {
+                                    dotElement.classList.add('__eslidegallery-active-dot');
+                                }
+                                dotElement.setAttribute('data-img',imgSrc);
+                                this.dotContainer.append(dotElement);
+                            }
                         }
                     }
                     if (params.shift == 'left') {
@@ -61,6 +72,15 @@ class eSlideGallery {
                     this.imageCount = imageElemList.length;
                     for (let i=0; i<this.imageCount; i++) {
                         imageElemList[i].classList.add('__eslidegallery-slide');
+                        if (this.dotContainer) {
+                            let dotElement = document.createElement('span');
+                            dotElement.classList.add('__eslidegallery-dot');
+                            if (i == 0) {
+                                dotElement.classList.add('__eslidegallery-active-dot');
+                            }
+                            dotElement.setAttribute('data-img',(i+1));
+                            this.dotContainer.append(dotElement);
+                        }
                     }
                     if (params.shift == 'left') {
                         this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
@@ -124,6 +144,21 @@ class eSlideGallery {
             },false);
         }
 
+        this.changeDot = function () {
+            if (!this.dotContainer) {
+                return
+            }
+            let activeDot = this.dotContainer.querySelector('.__eslidegallery-active-dot');
+            if (activeDot) {
+                activeDot.classList.remove('__eslidegallery-active-dot');
+            }
+            let newActiveDot = this.dotContainer.querySelector('.__eslidegallery-dot[data-img="' + this.position + '"]');
+            console.log(newActiveDot);
+            if (newActiveDot) {
+                newActiveDot.classList.add('__eslidegallery-active-dot');
+            }
+        }
+
         this.move = function (mov) {
             if (!this.container) {
                 return;
@@ -146,6 +181,7 @@ class eSlideGallery {
                 this.position = 1;
             }
             this.container.setAttribute('data-position',this.position);
+            this.changeDot();
             return this.position;
         }
 
@@ -159,6 +195,7 @@ class eSlideGallery {
                 this.position = this.imageCount;
             }
             this.container.setAttribute('data-position',this.position);
+            this.changeDot();
             return this.position;
         }
 

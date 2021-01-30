@@ -24,6 +24,9 @@
         .slider-nav * {
             display: inline;
         }
+        .slider-dots {
+            text-align: center;
+        }
     </style>
     <link rel="stylesheet" href="slider.css">
 </head>
@@ -38,6 +41,7 @@
     <div data-img="img/005.jpg" style="background-image: url('example_img/005.jpg')"></div>
     <div data-img="img/006.jpg" style="background-image: url('example_img/006.jpg')"></div>
 </div>
+<div class="slider-dots" id="dotcontainer"></div>
 <div class="slider-nav">
     <button class="slider-prev"><<</button>
     <div class="slider-counter">
@@ -50,7 +54,7 @@
 </div>
 <script src="slider.js"></script>
 <script>
-let slider = new eSlideGallery('#slider');
+let slider = new eSlideGallery('#slider',{dots: '#dotcontainer'});
 document.querySelector('button.slider-prev').addEventListener('click',function(){
     let num = slider.prev();
     document.querySelector('.slider-current').innerHTML = num;
