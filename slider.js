@@ -1,7 +1,7 @@
 class eSlideGallery {
-    constructor (selector,shift='center',convertImg=false,additional='') {
-        if (shift!='left' && shift != 'right' && shift != 'center') {
-            shift = 'center'
+    constructor (selector, params = {shift: 'center', convertImg: false}) {
+        if (params.shift!='left' && params.shift != 'right' && params.shift != 'center') {
+            params.shift = 'center'
         }
         this.imageCount;
         this.position = 1;
@@ -10,11 +10,11 @@ class eSlideGallery {
         this.autoInterval = null;
 
         let activePosition = 2;
-        if (shift=='left') {
+        if (params.shift=='left') {
             activePosition = 1;
         }
 
-        if (convertImg) {
+        if (params.convertImg) {
             let imageElemList = this.container.querySelectorAll(selector+' > img');
             if (imageElemList && imageElemList.length>0) {
                 this.imageCount = imageElemList.length;
@@ -29,14 +29,14 @@ class eSlideGallery {
                         this.container.append(imgElement);
                     }
                 }
-                if (shift == 'left') {
+                if (params.shift == 'left') {
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                 }
-                else if (shift == 'right') {
+                else if (params.shift == 'right') {
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                 }
-                else if (shift == 'center') {
+                else if (params.shift == 'center') {
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                 }
@@ -49,14 +49,14 @@ class eSlideGallery {
                 for (let i=0; i<this.imageCount; i++) {
                     imageElemList[i].classList.add('__eslidegallery-slide');
                 }
-                if (shift == 'left') {
+                if (params.shift == 'left') {
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                 }
-                else if (shift == 'right') {
+                else if (params.shift == 'right') {
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                 }
-                else if (shift == 'center') {
+                else if (params.shift == 'center') {
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                     this.container.prepend(this.container.querySelector('.__eslidegallery-slide:last-child'));
                 }
@@ -65,7 +65,7 @@ class eSlideGallery {
 
         this.container.setAttribute('data-count',this.imageCount);
         this.container.setAttribute('data-position',this.position);
-        this.container.classList.add('__eslidegallery-'+shift);
+        this.container.classList.add('__eslidegallery-'+params.shift);
 
         /* touch */
         let th = this;
@@ -154,6 +154,10 @@ class eSlideGallery {
             this.autoInterval = setInterval(() => {
                 th.next();
             }, delay);
+        }
+
+        this.dots = function(dotContainer) {
+
         }
     }
 }
