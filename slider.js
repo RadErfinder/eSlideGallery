@@ -1,7 +1,14 @@
 class eSlideGallery {
-    constructor (selector, params = {shift: 'center', convertImg: false}) {
+    constructor (selector, params = {shift: 'center', convertImg: false, dots: null}) {
+        console.log(params.convertImg);
         if (params.shift!='left' && params.shift != 'right' && params.shift != 'center') {
             params.shift = 'center'
+        }
+        if (params.convertImg === undefined) {
+            params.convertImg = false;
+        }
+        if (params.dots === undefined) {
+            params.dots = null;
         }
         this.imageCount;
         this.position = 1;
@@ -13,7 +20,7 @@ class eSlideGallery {
         else {
             this.container.classList.add('__eslidegallery-container');
             this.autoInterval = null;
-            this.dotContainer = null;
+            this.dotContainer = params.dots;
 
             let activePosition = 2;
             if (params.shift=='left') {
