@@ -54,7 +54,7 @@
 </div>
 <script src="slider.js"></script>
 <script>
-let slider = new eSlideGallery('#slider',{dots: '#dotcontainer',imgClick: true});
+let slider = new eSlideGallery('#slider',{dots: '#dotcontainer',dotClick: true,imgClick: true});
 document.querySelector('button.slider-prev').addEventListener('click',function(){
     let num = slider.prev();
     document.querySelector('.slider-current').innerHTML = num;

@@ -53,7 +53,7 @@
 </div>
 <script src="slider.js"></script>
 <script>
-let slider = new eSlideGallery('#slider',{imgClick: true, convertImg: true});
+let slider = new eSlideGallery('#slider',{convertImg: true});
 document.querySelector('button.slider-prev').addEventListener('click',function(){
     let num = slider.prev();
     document.querySelector('.slider-current').innerHTML = num;

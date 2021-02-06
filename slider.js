@@ -181,7 +181,6 @@ class eSlideGallery {
                 activeDot.classList.remove('__eslidegallery-active-dot');
             }
             let newActiveDot = this.dotContainer.querySelector('.__eslidegallery-dot[data-item="' + this.position + '"]');
-            console.log(newActiveDot);
             if (newActiveDot) {
                 newActiveDot.classList.add('__eslidegallery-active-dot');
             }
@@ -211,22 +210,26 @@ class eSlideGallery {
 
             if (oldPosition < position && leftShift >= position - oldPosition) {
                 for (let i=0; i<(position - oldPosition); i++) {
-                    setTimeout(()=>{th.next()},150);
+                    setTimeout(()=>{th.next()},0);
                 }
             }
             else if (oldPosition < position && leftShift < position - oldPosition) {
+                /*let i = 1;
+                while (i < leftShift) {
+
+                }*/
                 for (let i=0; i<leftShift; i++) {
-                    setTimeout(()=>{th.prev()},150);
+                    setTimeout(()=>{th.prev()},0);
                 }
             }
             else if (oldPosition > position && rightShift < oldPosition - position) {
                 for (let i=0; i<rightShift; i++) {
-                    setTimeout(()=>{th.next()},150);
+                    setTimeout(()=>{th.next()},0);
                 }
             }
             else if (oldPosition > position && rightShift >= oldPosition - position) {
                 for (let i=0; i<(oldPosition - position); i++) {
-                    setTimeout(()=>{th.prev()},150);
+                    setTimeout(()=>{th.prev()},0);
                 }
             }
         }
